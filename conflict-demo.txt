@@ -1,2 +1,2 @@
-Line 1: Base original text.
+Line 1: Branch B decided to use APPLES here.
 Line 2: Common text that will not change.
