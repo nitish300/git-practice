@@ -1,2 +1,2 @@
-Line 1: Base original text.
+Line 1: Branch A decided to use ORANGES here.
 Line 2: Common text that will not change.
