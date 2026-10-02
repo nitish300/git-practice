@@ -1,2 +1,3 @@
+Line 1: Branch B decided to use APPLES here.
 Line 1: Branch A decided to use ORANGES here.
 Line 2: Common text that will not change.
