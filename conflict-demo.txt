@@ -1,0 +1,2 @@
+Line 1: Base original text.
+Line 2: Common text that will not change.
