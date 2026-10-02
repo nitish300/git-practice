@@ -1,0 +1,2 @@
+"Line 1: This file is by Nitish Kumar Dev" > conflict.txt
+"Line 2: Version from MAIN branch" >> conflict.txt
