@@ -1,0 +1,6 @@
+id,name,role,status
+1,Alice,Developer,active
+2,Bob,Designer,active
+3,Charlie,Tester,inactive
+4,Diana,DevOps,active
+5,Eve,Manager,active

@@ -1,0 +1,15 @@
+== Developer Notes ==
+
+TODO:
+- [ ] Add unit tests for all modules
+- [ ] Set up CI/CD pipeline
+- [ ] Write API documentation
+- [ ] Code review checklist
+
+BUGS:
+- None reported yet
+
+REMINDERS:
+- Always pull before push
+- Use feature branches
+- Write descriptive commit messages
