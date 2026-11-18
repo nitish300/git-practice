@@ -1,0 +1,14 @@
+{
+  "app_name": "Git Practice",
+  "version": "1.0.0",
+  "debug": true,
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "name": "git_practice_db"
+  },
+  "features": {
+    "dark_mode": false,
+    "notifications": true
+  }
+}
