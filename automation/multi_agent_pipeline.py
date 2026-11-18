@@ -13,16 +13,23 @@ import sys
 import subprocess
 import time
 
-def print_banner(agent_name: str, emoji: str, color_code: str = "\033[94m"):
+# Ensure UTF-8 output on Windows consoles
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
+def print_banner(agent_name: str, tag: str = "[*]", color_code: str = "\033[94m"):
     reset = "\033[0m"
     separator = "=" * 65
     print(f"\n{color_code}{separator}")
-    print(f" {emoji} [{agent_name.upper()}] ACTIVATED")
+    print(f" {tag} [{agent_name.upper()}] ACTIVATED")
     print(f"{separator}{reset}\n")
 
 class PlannerAgent:
     def plan(self, goal: str) -> dict:
-        print_banner("Agent 1: Planner & Architect", "🧠", "\033[95m")
+        print_banner("Agent 1: Planner & Architect", "[PLAN]", "\033[95m")
         print(f"Goal Received: '{goal}'")
         print("Analyzing codebase structure & dependencies...")
         time.sleep(0.6)
@@ -45,7 +52,7 @@ class PlannerAgent:
 
 class CoderAgent:
     def implement(self, plan: dict):
-        print_banner("Agent 2: Developer & Coder", "💻", "\033[94m")
+        print_banner("Agent 2: Developer & Coder", "[CODE]", "\033[94m")
         print(f"Writing code to: {plan['target_file']}...")
         os.makedirs(os.path.dirname(plan['target_file']), exist_ok=True)
         
@@ -69,7 +76,7 @@ def safe_divide(a: float, b: float) -> float:
 '''
         with open(plan['target_file'], "w", encoding="utf-8") as f:
             f.write(code)
-        print(f"  ✓ Code successfully written to {plan['target_file']}")
+        print(f"  [OK] Code successfully written to {plan['target_file']}")
         
         print(f"Writing test suite to: {plan['test_file']}...")
         os.makedirs(os.path.dirname(plan['test_file']), exist_ok=True)
@@ -109,12 +116,12 @@ if __name__ == "__main__":
 '''
         with open(plan['test_file'], "w", encoding="utf-8") as f:
             f.write(test_code)
-        print(f"  ✓ Test suite written to {plan['test_file']}")
+        print(f"  [OK] Test suite written to {plan['test_file']}")
         time.sleep(0.5)
 
 class TesterAgent:
     def verify(self, plan: dict) -> bool:
-        print_banner("Agent 3: QA & Tester", "🔍", "\033[93m")
+        print_banner("Agent 3: QA & Tester", "[QA]", "\033[93m")
         print(f"Executing automated test suite: {plan['test_file']}...")
         
         result = subprocess.run([sys.executable, plan['test_file']], capture_output=True, text=True)
@@ -122,27 +129,27 @@ class TesterAgent:
         print(result.stdout.strip())
         
         if result.returncode == 0:
-            print("  ✓ QA Approval: ALL 4 TESTS PASSED! Green light given to DevOps.")
+            print("  [OK] QA Approval: ALL 4 TESTS PASSED! Green light given to DevOps.")
             return True
         else:
-            print(f"  ✗ QA Failure:\n{result.stderr}")
+            print(f"  [FAIL] QA Failure:\n{result.stderr}")
             return False
 
 class DevOpsAgent:
     def deploy_and_commit(self, plan: dict):
-        print_banner("Agent 4: DevOps & Git Manager", "🚀", "\033[92m")
+        print_banner("Agent 4: DevOps & Git Manager", "[OPS]", "\033[92m")
         print("Checking Git status and staging verified artifacts...")
         
         # Add files
         subprocess.run(["git", "add", plan['target_file'], plan['test_file']], check=True)
-        print(f"  ✓ Staged: {plan['target_file']} and {plan['test_file']}")
+        print(f"  [OK] Staged: {plan['target_file']} and {plan['test_file']}")
         
         # Commit with conventional commits
         commit_msg = f"feat(math): add {plan['feature_name']} with verified unit tests"
         print(f"Applying Conventional Commit format: '{commit_msg}'...")
         commit_res = subprocess.run(["git", "commit", "-m", commit_msg], capture_output=True, text=True)
         print(commit_res.stdout.strip())
-        print("\n  ✓ Pipeline Completed: Code is tested, validated, and safely committed!")
+        print("\n  [OK] Pipeline Completed: Code is tested, validated, and safely committed!")
 
 def run_pipeline(user_goal: str):
     print("=" * 65)
